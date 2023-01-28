@@ -1,11 +1,15 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVC_Ecommerce.Models.Context;
+using MVC_Ecommerce.Models.Entity;
+using MVC_Ecommerce.Repositoy;
+using MVC_Ecommerce.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +30,22 @@ namespace MVC_Ecommerce
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IProductRepository, ProductService>();
+            services.AddScoped<ICategoryRepository, CategoryService>();
+
+            //Identity (kimlik yönetimi) dahil etme
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+
+            //IdentityUser nesnesi içerisinde bulunan varsayýlan þifre tanýmlamalarý aþaðýdaki iþlem ile beraber deðiþtirildi.
+            services.Configure<IdentityOptions>(x =>
+            {
+                x.Password.RequireDigit = false;
+                x.Password.RequiredLength = 6;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireUppercase = false;
+                x.Password.RequireLowercase = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,22 @@
+﻿@model LoginVM
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <form method="post">
+        <div class="col">
+            <div class="mt-2">
+                <label>Email</label>
+                <input type="email" class="form-control" asp-for="Email" />
+            </div>
+            <div class="mt-2">
+                <label>Password</label>
+                <input type="password" class="form-control" asp-for="Password" />
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+</div>
+

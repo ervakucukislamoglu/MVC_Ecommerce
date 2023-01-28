@@ -13,9 +13,15 @@ namespace MVC_Ecommerce.Models.Context
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
 
-
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
+        //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=DESKTOP-VR7NBQ8\\SQLEXPRESS; Database = MVC_EcommerceDb; Trusted_Connection = true;TrustServerCertificate = true");
+            }
+            base.OnConfiguring(optionsBuilder);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
