@@ -4,33 +4,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div asp-validation-summary="All">
-    </div>
-    <form method="post">
-
-        <div class="mx-auto">
-            <div>
-                <label>Username</label>
-                <span asp-validation-for="Username"></span>
-                <input type="text" class="form-control" asp-for="Username" />
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="row" asp-validation-summary="All">
             </div>
-            <div>
-                <label>Email</label>
-                <span asp-validation-for="Email"></span>
-                <input type="email" class="form-control" asp-for="Email" />
-            </div>
-            <div>
-                <label>Password</label>
-                <span asp-validation-for="Password"></span>
-                <input type="password" class="form-control" asp-for="Password" />
-            </div>
-            <div>
-                <label>Confirm Password</label>
-                <span asp-validation-for="ConfirmPassword"></span>
-                <input type="password" class="form-control" asp-for="ConfirmPassword" />
-            </div>
-            <button type="submit">Register</button>
+            <form method="post">
+                <div class="mx-auto">
+                    <div>
+                        <label>Kullanıcı Adı:</label>
+                        <span asp-validation-for="Username"></span>
+                        <input type="text" class="form-control" asp-for="Username" />
+                    </div>
+                    <div>
+                        <label>Email:</label>
+                        <span asp-validation-for="Email"></span>
+                        <input type="email" class="form-control" asp-for="Email" />
+                    </div>
+                    <div>
+                        <label>Şifre:</label>
+                        <span asp-validation-for="Password"></span>
+                        <input type="password" class="form-control" asp-for="Password" />
+                    </div>
+                    <div>
+                        <label>Şifre Doğrulama:</label>
+                        <span asp-validation-for="ConfirmPassword"></span>
+                        <input type="password" class="form-control" asp-for="ConfirmPassword" />
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-top:5px">Register</button>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
+    </div>
+</section>

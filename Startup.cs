@@ -33,8 +33,15 @@ namespace MVC_Ecommerce
             services.AddScoped<IProductRepository, ProductService>();
             services.AddScoped<ICategoryRepository, CategoryService>();
 
+            services.AddDbContext<AppDbContext>();
+
             //Identity (kimlik yönetimi) dahil etme
-            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<AppDbContext>();
+            
+            services.AddAuthentication();
+
 
 
             //IdentityUser nesnesi içerisinde bulunan varsayýlan þifre tanýmlamalarý aþaðýdaki iþlem ile beraber deðiþtirildi.
@@ -51,6 +58,7 @@ namespace MVC_Ecommerce
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

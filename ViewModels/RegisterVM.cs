@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVC_Ecommerce.ViewModels
 {
@@ -17,6 +18,7 @@ namespace MVC_Ecommerce.ViewModels
 
 
         [Required(ErrorMessage = "Şifre zorunlu!")]
+        [MinLength(6, ErrorMessage = "(Şifreniz en az 6 karakterli olmalıdır!)")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Şifre (Tekrar) zorunlu!")]
         [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor!")]

@@ -37,11 +37,6 @@ namespace MVC_Ecommerce.Controllers
             return View();
         }
 
-        public IActionResult LogIn()
-        {
-            return View();
-        }
-
         public IActionResult Register()
         {
             return View();
@@ -71,7 +66,11 @@ namespace MVC_Ecommerce.Controllers
                 }
                 else
                 {
-                    //todo:Eğer şifre varsayılan kurallara uygun değil ise alınan hata mesajı ilgili view'da (asp-for-validation-summary) gösterilmiyor!!!!
+                    if (newUser.PasswordHash.Length < 6)
+                    {
+                        ModelState.AddModelError("PasswordHash", "errormessage");
+                    }
+
                     return View(model);
                 }
 
